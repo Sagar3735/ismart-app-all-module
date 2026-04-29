@@ -1,0 +1,51 @@
+name: ismart_app
+description: "Flutter project."
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Navigation (replaces React Navigation)
+  go_router: ^13.0.0
+
+  # Icons (replaces MaterialCommunityIcons)
+  flutter_svg: ^2.0.9
+
+  # State Management (replaces useState / Context)
+  provider: ^6.1.1
+  # OR use riverpod if you prefer:
+  # flutter_riverpod: ^2.4.9
+  
+  google_fonts: ^6.1.0
+
+  # Local Storage (replaces AsyncStorage)
+  shared_preferences: ^2.2.2
+
+  # HTTP Client (for real API later)
+  dio: ^5.4.0
+
+  # Date formatting (replaces date-fns)
+  intl: ^0.19.0
+
+  # Bottom sheet (enhanced)
+  modal_bottom_sheet: ^3.0.0-pre
+
+  # Image caching (replaces <Image source={{ uri }}>)
+  cached_network_image: ^3.3.1
+
+  # Shimmer loading effect
+  shimmer: ^3.0.0
+
+  # Lottie animations (optional)
+  lottie: ^3.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
