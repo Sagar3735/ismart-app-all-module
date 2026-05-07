@@ -12,8 +12,15 @@ class AllModuleScreen extends StatefulWidget {
 }
 
 class _AllModuleScreenState extends State<AllModuleScreen> {
+  final TextEditingController _searchController = TextEditingController();
   String _searchQuery = '';
   String _selectedCategory = 'All';
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   final List<String> _categories = [
     'All',
@@ -105,29 +112,28 @@ class _AllModuleScreenState extends State<AllModuleScreen> {
         children: [
           Row(
             children: [
-              GestureDetector(
-                onTap: () {
-                  if (context.canPop()) {
+              if (context.canPop()) ...[
+                GestureDetector(
+                  onTap: () {
                     context.pop();
-                  } else {
-                    context.go('/');
-                  }
-                },
-                child: Container(
-                  width: 34,
-                  height: 34,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.12),
-                    border: Border.all(color: Colors.white.withValues(alpha: 0.18)),
-                    borderRadius: BorderRadius.circular(10),
+                  },
+                  child: Container(
+                    width: 34,
+                    height: 34,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.12),
+                      border: Border.all(color: Colors.white.withValues(alpha: 0.18)),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 16),
                   ),
-                  child: const Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 16),
                 ),
-              ),
-              const SizedBox(width: 12),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                const SizedBox(width: 12),
+              ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                   Text(
                     'All Modules',
                     style: GoogleFonts.plusJakartaSans(
@@ -147,8 +153,8 @@ class _AllModuleScreenState extends State<AllModuleScreen> {
                   ),
                 ],
               ),
-              const Spacer(),
-              Container(
+            ),
+            Container(
                 width: 34,
                 height: 34,
                 decoration: BoxDecoration(
@@ -187,6 +193,7 @@ class _AllModuleScreenState extends State<AllModuleScreen> {
               const SizedBox(width: 8),
               Expanded(
                 child: TextField(
+                  controller: _searchController,
                   cursorColor: Colors.white,
                   style: GoogleFonts.dmSans(
                     fontSize: 12,
@@ -297,7 +304,10 @@ class _AllModuleScreenState extends State<AllModuleScreen> {
               ),
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
-                  return _QuickAccessItem(module: categoryModules[index]);
+                  return _QuickAccessItem(
+                    key: ValueKey(categoryModules[index]['label']),
+                    module: categoryModules[index],
+                  );
                 },
                 childCount: categoryModules.length,
               ),
@@ -363,7 +373,7 @@ class _AllModuleScreenState extends State<AllModuleScreen> {
 
 class _QuickAccessItem extends StatefulWidget {
   final Map<String, dynamic> module;
-  const _QuickAccessItem({required this.module});
+  const _QuickAccessItem({super.key, required this.module});
 
   @override
   State<_QuickAccessItem> createState() => _QuickAccessItemState();
@@ -392,8 +402,9 @@ class _QuickAccessItemState extends State<_QuickAccessItem> with SingleTickerPro
   Widget build(BuildContext context) {
     return GestureDetector(
       onTapDown: (_) => _controller.forward(),
-      onTapUp: (_) {
-        _controller.reverse();
+      onTapUp: (_) => _controller.reverse(),
+      onTapCancel: () => _controller.reverse(),
+      onTap: () {
         if (widget.module['route'] != null) {
           context.push(widget.module['route']);
         } else {
@@ -402,7 +413,6 @@ class _QuickAccessItemState extends State<_QuickAccessItem> with SingleTickerPro
           );
         }
       },
-      onTapCancel: () => _controller.reverse(),
       child: ScaleTransition(
         scale: _scaleAnimation,
         child: Column(
