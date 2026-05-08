@@ -490,13 +490,13 @@ class _PFDetailsScreenState extends State<PFDetailsScreen>
             child: const Column(children: [
               Icon(Icons.trending_up_rounded,
                   size: 22, color: _C.successDark),
-              const SizedBox(height: 4),
-              const Text('+8.25%',
+              SizedBox(height: 4),
+              Text('+8.25%',
                   style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w800,
                       color: _C.successDark)),
-              const Text('Interest\np.a.',
+              Text('Interest\np.a.',
                   textAlign: TextAlign.center,
                   style:
                       TextStyle(fontSize: 9, color: _C.textSec, height: 1.3)),

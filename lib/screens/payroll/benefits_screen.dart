@@ -686,9 +686,9 @@ class _BenefitsScreenState extends State<BenefitsScreen>
                             child: const Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Icon(Icons.add_rounded,
+                                Icon(Icons.add_rounded,
                                     size: 18, color: _C.textSec),
-                                const Text('Add',
+                                Text('Add',
                                     style: TextStyle(
                                         fontSize: 8, color: _C.textSec)),
                               ],
@@ -833,19 +833,19 @@ class _BenefitsScreenState extends State<BenefitsScreen>
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('Tenure: ${tenureMonths ~/ 12} yr ${tenureMonths % 12} mo',
-                style: const TextStyle(fontSize: 11, color: _C.textSec)),
-            const Text('Eligibility: 5 years',
+                style: TextStyle(fontSize: 11, color: _C.textSec)),
+            Text('Eligibility: 5 years',
                 style: TextStyle(fontSize: 11, color: _C.textSec)),
           ],
         ),
         const SizedBox(height: 6),
         ClipRRect(
           borderRadius: BorderRadius.circular(6),
-          child: LinearProgressIndicator(
+          child: const LinearProgressIndicator(
             value: progress,
             minHeight: 10,
             backgroundColor: _C.successLight,
-            valueColor: const AlwaysStoppedAnimation<Color>(_C.successDark),
+            valueColor: AlwaysStoppedAnimation<Color>(_C.successDark),
           ),
         ),
         const SizedBox(height: 4),
