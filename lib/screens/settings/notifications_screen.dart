@@ -16,6 +16,7 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 // ─────────────────────────────────────────────
 // INLINE THEME
@@ -166,7 +167,7 @@ final _allNotifications = [
     time: '10:15 AM',
     dateGroup: 'today',
     actionLabel: 'View Leave',
-    actionRoute: '/leave',
+    actionRoute: '/leave_apply',
     isRead: false,
   ),
   _Notification(
@@ -272,7 +273,7 @@ final _allNotifications = [
     time: '26 Apr',
     dateGroup: 'earlier',
     actionLabel: 'View Tour',
-    actionRoute: '/tour',
+    actionRoute: '/tour_request',
     isRead: true,
   ),
   _Notification(
@@ -470,8 +471,11 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                             }),
                             onAction: () {
                               setState(() => n.isRead = true);
-                              _snack('Opening ${n.actionRoute ?? "screen"}…',
-                                  _C.primary);
+                              if (n.actionRoute != null) {
+                                context.push(n.actionRoute!);
+                              } else {
+                                _snack('No screen to open', _C.warningDark);
+                              }
                             },
                           )),
                       const SizedBox(height: 16),
@@ -489,8 +493,11 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                             }),
                             onAction: () {
                               setState(() => n.isRead = true);
-                              _snack('Opening ${n.actionRoute ?? "screen"}…',
-                                  _C.primary);
+                              if (n.actionRoute != null) {
+                                context.push(n.actionRoute!);
+                              } else {
+                                _snack('No screen to open', _C.warningDark);
+                              }
                             },
                           )),
                       const SizedBox(height: 16),
@@ -508,8 +515,11 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                             }),
                             onAction: () {
                               setState(() => n.isRead = true);
-                              _snack('Opening ${n.actionRoute ?? "screen"}…',
-                                  _C.primary);
+                              if (n.actionRoute != null) {
+                                context.push(n.actionRoute!);
+                              } else {
+                                _snack('No screen to open', _C.warningDark);
+                              }
                             },
                           )),
                     ],

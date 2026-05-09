@@ -1005,14 +1005,14 @@ class _TourRequestScreenState extends State<TourRequestScreen>
                 width: double.infinity,
                 height: 46,
                 child: OutlinedButton(
-                  onPressed: _submitting ? null : () => setState(_resetForm),
+                  onPressed: _submitting ? null : () => Navigator.of(context).pop(),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: _C.textSec,
                     side: const BorderSide(color: _C.border, width: 1.5),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12)),
                   ),
-                  child: const Text('Reset Form',
+                  child: const Text('Cancel',
                       style:
                           TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
                 ),
